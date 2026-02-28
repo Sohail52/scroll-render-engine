@@ -1,0 +1,537 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  font-family: 'Archivo Narrow', sans-serif;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* 1. SCROLL SECTION (UNCHANGED) */
+.scroll-section {
+  height: 800vh;
+  position: relative;
+  background-color: #000;
+}
+
+canvas {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 2;
+}
+
+#ambient-canvas {
+  z-index: 1;
+  filter: blur(40px) saturate(1.2);
+  transform: scale(1.1);
+  will-change: transform;
+}
+
+.perf-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.perf-toggle:hover {
+  background: #fff;
+  color: #000;
+}
+
+.hero-overlay {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+#hero-text {
+  font-family: 'Antonio', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  font-size: clamp(3rem, 10vw, 6rem);
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  margin: 0;
+  padding: 0 20px;
+  opacity: 1;
+}
+
+.reveal-section {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* LOADER */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+
+.loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-content {
+  width: 200px;
+}
+
+.loader-text {
+  color: #fff;
+  font-family: 'Antonio', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loader-bar-bg {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.loader-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #fff;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* 2. BASE AND UTILITIES */
+.page-content {
+  background-color: #ffffff;
+  /* Smooth transition guaranteed via sticky wrap end */
+  position: relative;
+  z-index: 10;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-custom {
+  margin-bottom: 2rem;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* TYPOGRAPHY */
+.heading-large,
+.heading-medium,
+.banner-headline,
+.eyebrow {
+  font-family: 'Antonio', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.heading-large {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.85;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.heading-medium {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.desc-text {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: 0 auto 2.5rem;
+}
+
+.max-w-600 {
+  max-width: 600px;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn-dark {
+  background-color: #111;
+  color: #fff;
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #111;
+}
+
+.btn-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* 3. INTRO SECTION */
+.intro-section {
+  padding: 6rem 0;
+}
+
+/* 4. CAROUSEL SECTION */
+.carousel-section {
+  padding: 2rem 0 6rem;
+}
+
+.carousel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.carousel-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-btn:hover {
+  background: #e0e0e0;
+}
+
+.carousel-track-wrapper {
+  padding: 0 5%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel-track-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+}
+
+.product-card {
+  width: 80vw;
+  max-width: 400px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.product-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #f5f5f5;
+  margin-bottom: 1rem;
+}
+
+.product-title {
+  font-family: 'Antonio', sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.product-category {
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.product-price {
+  font-weight: 700;
+}
+
+/* 5. CINEMATIC BANNER */
+.banner-section {
+  width: 100%;
+  height: 85vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.banner-headline {
+  color: #fff;
+  font-size: clamp(3rem, 10vw, 7rem);
+  text-align: center;
+  padding: 0 20px;
+  line-height: 0.85;
+}
+
+/* 6. ESSENTIALS GRID */
+.essentials-section {
+  padding: 6rem 0;
+}
+
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.essential-item {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #eee;
+}
+
+.essential-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tag-btn {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  padding: 0.75rem 2rem;
+}
+
+/* ENGINEERING SECTION */
+.engineering-section {
+  padding: 6rem 0;
+  background: #fdfdfd;
+}
+
+.engineering-card {
+  max-width: 900px;
+  margin: 0 auto;
+  border-top: 2px solid #111;
+  padding-top: 3rem;
+}
+
+.tech-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tech-list li {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.tech-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #111;
+  font-weight: bold;
+}
+
+.tech-list strong {
+  color: #111;
+  font-family: 'Antonio', sans-serif;
+  letter-spacing: 0.5px;
+  margin-right: 0.5rem;
+}
+
+/* 7. FOOTER */
+.site-footer {
+  background: #111;
+  color: #fff;
+  padding: 4rem 0;
+}
+
+.footer-layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.footer-title {
+  font-family: 'Antonio', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-list {
+  list-style: none;
+}
+
+.footer-list li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-list a {
+  color: #999;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.footer-list a:hover {
+  color: #fff;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-icons a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Antonio', sans-serif;
+  transition: background 0.3s;
+}
+
+.footer-icons a:hover {
+  background: #555;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .grid-3col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-3col {
+    grid-template-columns: 1fr;
+  }
+
+  .carousel-track-wrapper {
+    padding: 0;
+  }
+
+  .product-card {
+    width: 85vw;
+  }
+
+  .footer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-block:not(:first-child) {
+    margin-top: 1rem;
+  }
+}

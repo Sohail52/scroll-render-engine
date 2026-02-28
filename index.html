@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Animation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Archivo+Narrow:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="loader-text">Loading Frames <span id="progress-text">0%</span></div>
+            <div class="loader-bar-bg">
+                <div id="progress-bar" class="loader-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dark scrollytelling background -->
+    <div class="scroll-section">
+        <canvas id="ambient-canvas"></canvas>
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-overlay">
+            <h1 id="hero-text">UNLEASH THE BEAST</h1>
+        </div>
+        <button id="perf-toggle" class="perf-toggle">Mode: High</button>
+    </div>
+
+    <!-- White Landing Page Content -->
+    <div class="page-content">
+        <!-- 1. Product Intro Section -->
+        <section class="intro-section reveal-section">
+            <div class="container text-center">
+                <span class="eyebrow">First Look</span>
+                <h1 class="heading-large">NIKE AIR MAX PULSE</h1>
+                <p class="desc-text max-w-600">
+                    Push past your limits. The new Air Max Pulse brings raw energy and unapologetic style to the
+                    streets. Built for those who never stop.
+                </p>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-dark">Shop Mens</a>
+                    <a href="#" class="btn btn-dark">Shop Womens</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Horizontal Product Carousel -->
+        <section class="carousel-section reveal-section">
+            <div class="container">
+                <div class="carousel-header">
+                    <h2 class="heading-medium">Best of Air Max</h2>
+                    <div class="carousel-controls">
+                        <button class="nav-btn prev" aria-label="Previous">&larr;</button>
+                        <button class="nav-btn next" aria-label="Next">&rarr;</button>
+                    </div>
+                </div>
+
+                <div class="carousel-track-wrapper">
+                    <div class="carousel-track">
+                        <div class="product-card">
+                            <img src="assets/products/shoe1.jpg" class="product-img" alt="Red Nike Shoe">
+                            <div class="product-info">
+                                <h3 class="product-title">Nike Air Max Pulse</h3>
+                                <p class="product-category">Men's Shoes</p>
+                                <p class="product-price">$150</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <img src="assets/products/shoe2.jpg" class="product-img" alt="Blue Nike Shoe">
+                            <div class="product-info">
+                                <h3 class="product-title">Nike Air Max 270</h3>
+                                <p class="product-category">Women's Shoes</p>
+                                <p class="product-price">$160</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <img src="assets/products/shoe3.jpg" class="product-img" alt="White Nike Shoe">
+                            <div class="product-info">
+                                <h3 class="product-title">Nike Air Max 97</h3>
+                                <p class="product-category">Men's Shoes</p>
+                                <p class="product-price">$175</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Cinematic Banner Section -->
+        <section class="banner-section reveal-section">
+            <img src="assets/banner/banner.jpg" alt="Cinematic Running" class="banner-bg">
+            <div class="banner-overlay">
+                <h2 class="banner-headline">STEP INTO WHAT FEELS GOOD</h2>
+            </div>
+        </section>
+
+        <!-- 4. Essentials Grid -->
+        <section class="essentials-section reveal-section">
+            <div class="container">
+                <h2 class="heading-medium mb-custom">The Essentials</h2>
+                <div class="grid-3col">
+                    <div class="essential-item">
+                        <img src="https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=800&h=1000&fit=crop"
+                            alt="Men's Essentials">
+                        <a href="#" class="btn btn-white tag-btn">Men</a>
+                    </div>
+                    <div class="essential-item">
+                        <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&h=1000&fit=crop"
+                            alt="Women's Essentials">
+                        <a href="#" class="btn btn-white tag-btn">Women</a>
+                    </div>
+                    <div class="essential-item">
+                        <img src="https://images.unsplash.com/photo-1503919005314-30d93d07d823?w=800&h=1000&fit=crop"
+                            alt="Kids' Essentials">
+                        <a href="#" class="btn btn-white tag-btn">Kids</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Engineering Showcase Section -->
+        <section class="engineering-section reveal-section">
+            <div class="container">
+                <div class="engineering-card">
+                    <h2 class="heading-medium mb-custom">ENGINEERING THE SCROLL ENGINE</h2>
+                    <ul class="tech-list">
+                        <li><strong>Preloading Strategy:</strong> 242 frame images eagerly loaded into memory to prevent
+                            layout shifts or flashing during intense scroll behavior.</li>
+                        <li><strong>ScrollTrigger Progress Mapping:</strong> Mathematical binding of GSAP progress (0.0
+                            to 1.0) normalized cleanly to the 0-241 integer frame sequence.</li>
+                        <li><strong>requestAnimationFrame Loop:</strong> Offloads heavy canvas bitmap draws directly
+                            into the browser's native repaint cycle for unblocked 60fps performance.</li>
+                        <li><strong>Dual Canvas Architecture:</strong> Foreground renders pixel-perfect bounded
+                            'contain' scaling, while a background canvas is blurred and scaled up 110% to completely
+                            eliminate any viewport black bars.</li>
+                        <li><strong>DevicePixelRatio Scaling:</strong> Calculating physical pixels versus CSS
+                            representation to ensure zero blurry artifacts on Retina and 4K screens.</li>
+                        <li><strong>Debounced Event Listeners:</strong> Window resizes are forcefully throttled by 250ms
+                            timeouts to avoid destructive cascading render thrashing.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-layout">
+                    <div class="footer-block">
+                        <div class="footer-icons">
+                            <a href="#">IN</a>
+                            <a href="#">TW</a>
+                            <a href="#">FB</a>
+                            <a href="#">YT</a>
+                        </div>
+                    </div>
+                    <div class="footer-block">
+                        <h4 class="footer-title">SHOES</h4>
+                        <ul class="footer-list">
+                            <li><a href="#">All Shoes</a></li>
+                            <li><a href="#">Running Shoes</a></li>
+                            <li><a href="#">Lifestyle Shoes</a></li>
+                            <li><a href="#">Training Shoes</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-block">
+                        <h4 class="footer-title">SUPPORT</h4>
+                        <ul class="footer-list">
+                            <li><a href="#">Order Status</a></li>
+                            <li><a href="#">Shipping & Delivery</a></li>
+                            <li><a href="#">Returns</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-block">
+                        <h4 class="footer-title">COMPANY</h4>
+                        <ul class="footer-list">
+                            <li><a href="#">About Nike</a></li>
+                            <li><a href="#">News</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Purpose</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Simple Carousel JS
+        const track = document.querySelector('.carousel-track');
+        const nextBtn = document.querySelector('.nav-btn.next');
+        const prevBtn = document.querySelector('.nav-btn.prev');
+
+        if (track && nextBtn && prevBtn) {
+            nextBtn.addEventListener('click', () => {
+                track.scrollBy({ left: 300, behavior: 'smooth' });
+            });
+            prevBtn.addEventListener('click', () => {
+                track.scrollBy({ left: -300, behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+
+</html>
