@@ -132,19 +132,24 @@
                 <div class="engineering-card">
                     <h2 class="heading-medium mb-custom">ENGINEERING THE SCROLL ENGINE</h2>
                     <ul class="tech-list">
-                        <li><strong>Preloading Strategy:</strong> 242 frame images eagerly loaded into memory to prevent
-                            layout shifts or flashing during intense scroll behavior.</li>
-                        <li><strong>ScrollTrigger Progress Mapping:</strong> Mathematical binding of GSAP progress (0.0
-                            to 1.0) normalized cleanly to the 0-241 integer frame sequence.</li>
-                        <li><strong>requestAnimationFrame Loop:</strong> Offloads heavy canvas bitmap draws directly
-                            into the browser's native repaint cycle for unblocked 60fps performance.</li>
-                        <li><strong>Dual Canvas Architecture:</strong> Foreground renders pixel-perfect bounded
-                            'contain' scaling, while a background canvas is blurred and scaled up 110% to completely
-                            eliminate any viewport black bars.</li>
-                        <li><strong>DevicePixelRatio Scaling:</strong> Calculating physical pixels versus CSS
-                            representation to ensure zero blurry artifacts on Retina and 4K screens.</li>
-                        <li><strong>Debounced Event Listeners:</strong> Window resizes are forcefully throttled by 250ms
-                            timeouts to avoid destructive cascading render thrashing.</li>
+                        <li><strong>Frame Assets Resized for Memory Efficiency:</strong> Source images constrained to
+                            1280px width, substantially reducing RAM payload overhead per frame while preserving visual
+                            fidelity.</li>
+                        <li><strong>Balanced Preload Strategy:</strong> Sequenced caching ensures all 242 frames are
+                            buffered gracefully into memory to prevent scroll jitter or mid-animation layout shifting on
+                            slower networks.</li>
+                        <li><strong>Performance-Aware Rendering Architecture:</strong> Core logic cleanly separates
+                            GSAP's scroll tracking progress from the DOM by mapping directly to integers, passing bitmap
+                            rendering off to the device's native `requestAnimationFrame` cycle.</li>
+                        <li><strong>Conditional Dual Canvas Rendering:</strong> Seamless dual-canvas immersion logic
+                            mathematically bounds standard sizing up front, with hardware toggles available to
+                            gracefully deactivate blur filters via Performance Mode context on lower-tier hardware.</li>
+                        <li><strong>GPU Cost Management:</strong> By toggling `display: none` and stopping `clearRect`
+                            processes aggressively when the ambient canvas is inactive, the engine prevents unnecessary
+                            shader tax across integrated graphics chips.</li>
+                        <li><strong>Mobile-Safe Optimization Decisions:</strong> DevicePixelRatio math calculations
+                            paired with debounced viewport resize observers secure 60fps pacing even across strict
+                            cellular limits and fluctuating device real estate.</li>
                     </ul>
                 </div>
             </div>
